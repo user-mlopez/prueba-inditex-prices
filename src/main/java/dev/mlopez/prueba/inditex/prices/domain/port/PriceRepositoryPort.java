@@ -9,5 +9,4 @@ public interface PriceRepositoryPort {
 
     Optional<Price> findApplicablePrice(int brandId, int productId, LocalDateTime date);
 
-
 }
