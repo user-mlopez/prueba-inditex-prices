@@ -39,7 +39,6 @@ class PriceRestControllerExceptionHandler {
         return createHttpErrorInfo(NOT_FOUND, request, messageSource.getMessage(ex.getMessage()));
     }
 
-
     @ResponseStatus(UNPROCESSABLE_ENTITY)
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public @ResponseBody HttpErrorInfo handleMethodArgumentTypeMismatchException(HttpServletRequest request, MethodArgumentTypeMismatchException ex) {
@@ -50,7 +49,6 @@ class PriceRestControllerExceptionHandler {
         return createHttpErrorInfo(UNPROCESSABLE_ENTITY, request, errorMessage);
     }
 
-
     @ResponseStatus(UNPROCESSABLE_ENTITY)
     @ExceptionHandler(MissingServletRequestParameterException.class)
     public @ResponseBody HttpErrorInfo handleMissingServletRequestParameterException(HttpServletRequest request, MissingServletRequestParameterException ex) {
@@ -59,12 +57,6 @@ class PriceRestControllerExceptionHandler {
                 new Object[]{ex.getParameterName().toString(), ex.getParameterType()});
 
         return createHttpErrorInfo(UNPROCESSABLE_ENTITY, request, errorMessage);
-    }
-
-
-    private HttpErrorInfo createHttpErrorInfo(HttpStatus httpStatus, HttpServletRequest request, Exception ex) {
-
-        return createHttpErrorInfo(httpStatus, request, ex.getMessage());
     }
 
     private HttpErrorInfo createHttpErrorInfo(HttpStatus httpStatus, HttpServletRequest request, String message) {
