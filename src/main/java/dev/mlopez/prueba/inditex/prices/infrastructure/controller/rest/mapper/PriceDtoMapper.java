@@ -15,7 +15,7 @@ public interface PriceDtoMapper {
 
     @Mapping(source = "price.startDate", target = "startDate", dateFormat = "yyyy-MM-dd'T'HH:mm:ss")
     @Mapping(source = "price.endDate", target = "endDate", dateFormat = "yyyy-MM-dd'T'HH:mm:ss")
-    @Mapping(source = ".", target = "price", qualifiedByName = "formatearPrecio")
+    @Mapping(source = ".", target = "pvp", qualifiedByName = "formatearPrecio")
     PriceDto toPriceDto(Price price);
 
     @Named("formatearPrecio")

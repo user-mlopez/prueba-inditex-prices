@@ -22,7 +22,7 @@ public class PriceDto implements Serializable {
     private String endDate;
 
     @Schema(description = "Precio final", example = "35,50 EUR")
-    private String price;
+    private String pvp;
 
     public int getProductId() {
         return productId;
@@ -64,11 +64,11 @@ public class PriceDto implements Serializable {
         this.endDate = endDate;
     }
 
-    public String getPrice() {
-        return price;
+    public String getPvp() {
+        return pvp;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
+    public void setPvp(String pvp) {
+        this.pvp = pvp;
     }
 }

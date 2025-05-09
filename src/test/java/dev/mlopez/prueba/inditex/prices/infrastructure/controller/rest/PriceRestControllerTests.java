@@ -46,7 +46,7 @@ public class PriceRestControllerTests {
                 , response.getBody().getStartDate());
         Assertions.assertEquals(LocalDateTime.of(2020, 12, 31, 23, 59, 59).format(DateTimeFormatter.ISO_DATE_TIME)
                 , response.getBody().getEndDate());
-        Assertions.assertEquals("35.50 EUR", response.getBody().getPrice());
+        Assertions.assertEquals("35.50 EUR", response.getBody().getPvp());
     }
 
     @Test

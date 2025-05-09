@@ -31,7 +31,7 @@ public class PriceDtoMapperTests {
 
         PriceDto dto = priceDtoMapper.toPriceDto(price);
 
-        assertEquals("25.45 EUR", dto.getPrice());
+        assertEquals("25.45 EUR", dto.getPvp());
         assertEquals("2020-06-14T15:00:00", dto.getStartDate());
         assertEquals("2023-01-02T18:30:00", dto.getEndDate());
     }
@@ -45,7 +45,7 @@ public class PriceDtoMapperTests {
 
         PriceDto dto = priceDtoMapper.toPriceDto(price);
 
-        assertEquals("", dto.getPrice());
+        assertEquals("", dto.getPvp());
     }
 
 
@@ -57,7 +57,7 @@ public class PriceDtoMapperTests {
 
         PriceDto dto = priceDtoMapper.toPriceDto(price);
 
-        assertEquals("", dto.getPrice());
+        assertEquals("", dto.getPvp());
     }
 
 
@@ -69,7 +69,7 @@ public class PriceDtoMapperTests {
 
         PriceDto dto = priceDtoMapper.toPriceDto(price);
 
-        assertEquals("", dto.getPrice());
+        assertEquals("", dto.getPvp());
     }
 
     @Test
