@@ -1,9 +1,11 @@
 package dev.mlopez.prueba.inditex.prices.infrastructure.controller.rest.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
 
 import java.io.Serializable;
 
+@Data
 public class PriceDto implements Serializable {
 
     @Schema(description = "ID del producto", example = "35455")
@@ -24,51 +26,5 @@ public class PriceDto implements Serializable {
     @Schema(description = "Precio final", example = "35,50 EUR")
     private String pvp;
 
-    public int getProductId() {
-        return productId;
-    }
 
-    public void setProductId(int productId) {
-        this.productId = productId;
-    }
-
-    public int getBrandId() {
-        return brandId;
-    }
-
-    public void setBrandId(int brandId) {
-        this.brandId = brandId;
-    }
-
-    public long getPriceList() {
-        return priceList;
-    }
-
-    public void setPriceList(long priceList) {
-        this.priceList = priceList;
-    }
-
-    public String getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
-    }
-
-    public String getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
-    }
-
-    public String getPvp() {
-        return pvp;
-    }
-
-    public void setPvp(String pvp) {
-        this.pvp = pvp;
-    }
 }

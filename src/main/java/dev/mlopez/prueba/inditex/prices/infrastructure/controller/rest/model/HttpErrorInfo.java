@@ -1,10 +1,12 @@
 package dev.mlopez.prueba.inditex.prices.infrastructure.controller.rest.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
 import org.springframework.http.HttpStatus;
 
 import java.time.ZonedDateTime;
 
+@Data
 public class HttpErrorInfo {
 
     @Schema(description = "Fecha y hora del error", example = "2025-05-09T14:48:48.8555267+02:00")
@@ -33,23 +35,4 @@ public class HttpErrorInfo {
         this.message = message;
     }
 
-    public ZonedDateTime getTimestamp() {
-        return timestamp;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public int getStatus() {
-        return httpStatus.value();
-    }
-
-    public String getError() {
-        return httpStatus.getReasonPhrase();
-    }
-
-    public String getMessage() {
-        return message;
-    }
 }
