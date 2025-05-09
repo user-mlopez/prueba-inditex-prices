@@ -9,7 +9,7 @@ spring:
     url: jdbc:h2:mem:pricesdb
     driverClassName: org.h2.Driver
     username: username
-    password: password
+    #password: p455w0rd
   h2:
     console:
       enabled: true

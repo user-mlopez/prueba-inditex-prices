@@ -21,7 +21,7 @@ public interface PriceDtoMapper {
     @Named("formatearPrecio")
     static String formatearPrecio(Price price) {
         if (price.getPvp() == null || price.getCurr() == null) {
-            LOG.warn("Review the currency and price fields of {0}", price);
+            LOG.warn("Review the currency and price fields of " + price);
             return "";
         }
         return price.getPvp().toPlainString() + " " + price.getCurr();

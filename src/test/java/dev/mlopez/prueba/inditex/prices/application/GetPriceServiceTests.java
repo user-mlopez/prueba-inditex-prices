@@ -34,8 +34,8 @@ class GetPriceServiceTests {
         int invalidBrandId = 0;
         LocalDateTime now = LocalDateTime.now();
 
-        ValidationException ex = assertThrows(ValidationException.class, () ->
-                getPriceService.execute(invalidBrandId, 1, now)
+        ValidationException ex = assertThrows(ValidationException.class,
+                () -> getPriceService.execute(invalidBrandId, 1, now)
         );
 
         assertTrue(ex.getErrors().contains("error.brandid.invalid"));
@@ -49,9 +49,9 @@ class GetPriceServiceTests {
 
         Mockito.when(priceRepositoryPort.existsBrandId(notExistsBrandId)).thenReturn(false);
 
-        ValidationException ex = assertThrows(ValidationException.class, () -> {
-            getPriceService.execute(notExistsBrandId, 1, now);
-        });
+        ValidationException ex = assertThrows(ValidationException.class,
+                () -> getPriceService.execute(notExistsBrandId, 1, now)
+        );
 
         assertTrue(ex.getErrors().contains("error.brandid.notfound"));
     }
@@ -61,8 +61,8 @@ class GetPriceServiceTests {
         int invalidProductId = 0;
         LocalDateTime now = LocalDateTime.now();
 
-        ValidationException ex = assertThrows(ValidationException.class, () ->
-                getPriceService.execute(1, invalidProductId, now)
+        ValidationException ex = assertThrows(ValidationException.class,
+                () -> getPriceService.execute(1, invalidProductId, now)
         );
 
         assertTrue(ex.getErrors().contains("error.productid.invalid"));
@@ -76,9 +76,9 @@ class GetPriceServiceTests {
 
         Mockito.when(priceRepositoryPort.existsProductId(notExistsProductId)).thenReturn(false);
 
-        ValidationException ex = assertThrows(ValidationException.class, () -> {
-            getPriceService.execute(1, notExistsProductId, now);
-        });
+        ValidationException ex = assertThrows(ValidationException.class,
+                () -> getPriceService.execute(1, notExistsProductId, now)
+        );
 
         assertTrue(ex.getErrors().contains("error.productid.notfound"));
     }
@@ -95,9 +95,9 @@ class GetPriceServiceTests {
 
         Mockito.when(priceRepositoryPort.isProductAssociatedWithBrand(existsBrandId, productIdNotAssociated)).thenReturn(false);
 
-        ValidationException ex = assertThrows(ValidationException.class, () -> {
-            getPriceService.execute(existsBrandId, productIdNotAssociated, now);
-        });
+        ValidationException ex = assertThrows(ValidationException.class,
+                () -> getPriceService.execute(existsBrandId, productIdNotAssociated, now)
+        );
 
         assertTrue(ex.getErrors().contains("error.brandid.productid"));
     }
@@ -106,9 +106,9 @@ class GetPriceServiceTests {
     @Test
     void shouldThrowValidationExceptionWhenDateIsNull() {
 
-        ValidationException ex = assertThrows(ValidationException.class, () -> {
-            getPriceService.execute(1, 1, null);
-        });
+        ValidationException ex = assertThrows(ValidationException.class,
+                () -> getPriceService.execute(1, 1, null)
+        );
 
         assertTrue(ex.getErrors().contains("error.date.required"));
     }
@@ -124,8 +124,8 @@ class GetPriceServiceTests {
         Mockito.when(priceRepositoryPort.findApplicablePrice(anyInt(), anyInt(), any(LocalDateTime.class)))
                 .thenReturn(Optional.empty());
 
-        PriceNotFoundException ex = assertThrows(PriceNotFoundException.class, () ->
-                getPriceService.execute(1, 1, now)
+        PriceNotFoundException ex = assertThrows(PriceNotFoundException.class,
+                () -> getPriceService.execute(1, 1, now)
         );
 
 
