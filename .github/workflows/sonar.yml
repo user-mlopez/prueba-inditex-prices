@@ -31,6 +31,12 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle
 
+      - name: Run Tests
+        run: ./gradlew test
+     
+      - name: Generate JaCoCo Report
+        run: ./gradlew jacocoTestReport
+
       - name: Run SonarQube analysis
         run: ./gradlew sonarqube -Dsonar.login=${{ secrets.SONAR_TOKEN_MLOPEZ }}
         env:
