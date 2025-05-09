@@ -19,8 +19,6 @@ spring:
   messages:
     encoding: UTF-8
 
-
-
 logbook:
   format:
     style: http
@@ -35,3 +33,36 @@ logging:
             sql:
               BasicBinder: trace
 
+springdoc:
+  swagger-ui.path: /openapi/swagger-ui.html
+  api-docs.path: /openapi/v3/api-docs
+  packagesToScan: dev.mlopez.prueba.inditex.prices
+  pathsToMatch: /**
+
+api:
+  common:
+    version: 1.0.0
+    title: API Prueba Inditex Prices
+    description: Servicio de prueba que tiene como objetivo permitir la consulta de la tarifa de un producto, para una fecha determinada.
+
+  responseCodes:
+    ok.description: OK
+    badRequest.description: Bad Request, formato no válido de la petición. Ver el mensaje de respuesta para más información.
+    notFound.description: Not found, el producto especificado no tiene un precio para la fecha dada.
+    unprocessableEntity.description: Unprocessable entity, los parámetros de entrada causaron un fallo en el procesamiento. Ver el mensaje de respuesta para más información.
+  prices:
+    name: Prices
+    description: API REST para consulta de las tarifas de productos.
+    get-prices:
+      summary: Devuelve la tarifa aplicable para el producto y la marca correspondientes en la fecha indicada.
+      description: |
+        ## Respuestas esperadas:
+
+        ### brandId 1, productId 35455, date 2020-06-14T10:00:00
+        &nbsp;&nbsp;**200** - **Ok**, se devuelve la tarifa correspondiente a la marca 1, producto 35455 en la fecha 2020/06/14 10:00.
+
+        ### brandId 1, productId 35455, date 2000-06-14T10:00:00
+        &nbsp;&nbsp;**404** - Un **Not Found** error será devuelto, tarifa no encontrada para la convinación de parámetros de entrada.
+
+        ### brandId 2, productId 35455, date 2020-06-14T10:00:00
+        &nbsp;&nbsp;**422** - Un **Unprocessable Entity** error será devuelto, no hay registros de la marca indicada.
