@@ -25,4 +25,13 @@ logbook:
   format:
     style: http
 
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: debug
+        type:
+          descriptor:
+            sql:
+              BasicBinder: trace
 
