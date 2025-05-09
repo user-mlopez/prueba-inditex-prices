@@ -16,6 +16,10 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
+  messages:
+    encoding: UTF-8
+
+
 
 logbook:
   format:

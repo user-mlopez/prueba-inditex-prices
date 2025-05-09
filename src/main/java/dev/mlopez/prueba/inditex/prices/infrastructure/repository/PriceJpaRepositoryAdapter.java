@@ -26,4 +26,22 @@ public class PriceJpaRepositoryAdapter implements PriceRepositoryPort {
         return priceJpaRepository.findApplicablePrice(brandId, productId, date).map(priceEntity -> mapper.toPrice(priceEntity));
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public boolean existsBrandId(int brandId) {
+        return priceJpaRepository.existsBrandId(brandId);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public boolean existsProductId(int productId) {
+        return priceJpaRepository.existsProductId(productId);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public boolean isProductAssociatedWithBrand(int brandId, int productId) {
+        return priceJpaRepository.isProductAssociatedWithBrand(brandId, productId);
+    }
+
 }

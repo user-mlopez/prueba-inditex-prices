@@ -9,4 +9,10 @@ public interface PriceRepositoryPort {
 
     Optional<Price> findApplicablePrice(int brandId, int productId, LocalDateTime date);
 
+    boolean existsBrandId(int brandId);
+
+    boolean existsProductId(int productId);
+
+    boolean isProductAssociatedWithBrand(int brandId, int productId);
+
 }

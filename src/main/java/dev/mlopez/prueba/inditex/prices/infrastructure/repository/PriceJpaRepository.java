@@ -15,4 +15,13 @@ public interface PriceJpaRepository extends JpaRepository<PriceEntity, Long> {
             " AND :date BETWEEN p.startDate AND p.endDate ORDER BY p.priority DESC LIMIT 1")
     Optional<PriceEntity> findApplicablePrice(int brandId, int productId, LocalDateTime date);
 
+    @Query("SELECT EXISTS (SELECT 1 FROM PriceEntity p WHERE p.brandId = :brandId)")
+    boolean existsBrandId(int brandId);
+
+    @Query("SELECT EXISTS (SELECT 1 FROM PriceEntity p WHERE p.productId = :productId)")
+    boolean existsProductId(int productId);
+
+    @Query("SELECT EXISTS (SELECT 1 FROM PriceEntity p WHERE p.brandId = :brandId AND p.productId = :productId)")
+    boolean isProductAssociatedWithBrand(int brandId, int productId);
+
 }
