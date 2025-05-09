@@ -76,7 +76,7 @@ class PriceRestControllerTests {
 
         Assertions.assertEquals(HttpStatus.UNPROCESSABLE_ENTITY, response.getStatusCode());
         Assertions.assertNotNull(response.getBody());
-        Assertions.assertEquals("El valor 'null' no es válido para el parámetro 'date' de tipo 'LocalDateTime'.", response.getBody().getMessage());
+        Assertions.assertEquals("El valor 'null' no es válido para el parámetro 'date'.", response.getBody().getMessage());
     }
 
     @Test

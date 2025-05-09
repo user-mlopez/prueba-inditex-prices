@@ -44,10 +44,7 @@ class PriceRestControllerExceptionHandler {
     public @ResponseBody HttpErrorInfo handleMethodArgumentTypeMismatchException(HttpServletRequest request, MethodArgumentTypeMismatchException ex) {
 
         String errorMessage = messageSource.getMessage("error.paramter.invalid",
-                new Object[]{
-                        (ex.getValue() != null ? ex.getValue().toString() : ""),
-                        ex.getName(),
-                        (ex.getRequiredType() != null ? ex.getRequiredType().getSimpleName() : "")});
+                new Object[]{ex.getValue(), ex.getName()});
 
         return createHttpErrorInfo(UNPROCESSABLE_ENTITY, request, errorMessage);
     }
