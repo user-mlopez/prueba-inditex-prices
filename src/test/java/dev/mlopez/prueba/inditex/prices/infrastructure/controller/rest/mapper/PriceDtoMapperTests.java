@@ -26,7 +26,7 @@ public class PriceDtoMapperTests {
         Price price = new Price();
         price.setStartDate(LocalDateTime.of(2020, 6, 14, 15, 0));
         price.setEndDate(LocalDateTime.of(2023, 1, 2, 18, 30));
-        price.setPrice(new BigDecimal("25.45"));
+        price.setPvp(new BigDecimal("25.45"));
         price.setCurr("EUR");
 
         PriceDto dto = priceDtoMapper.toPriceDto(price);
@@ -40,7 +40,7 @@ public class PriceDtoMapperTests {
     @Test
     void shouldReturnEmptyPriceWhenPriceIsNull() {
         Price price = new Price();
-        price.setPrice(null);
+        price.setPvp(null);
         price.setCurr("EUR");
 
         PriceDto dto = priceDtoMapper.toPriceDto(price);
@@ -52,7 +52,7 @@ public class PriceDtoMapperTests {
     @Test
     void shouldReturnEmptyPriceWhenCurrencyIsNull() {
         Price price = new Price();
-        price.setPrice(new BigDecimal("45.50"));
+        price.setPvp(new BigDecimal("45.50"));
         price.setCurr(null);
 
         PriceDto dto = priceDtoMapper.toPriceDto(price);
@@ -64,7 +64,7 @@ public class PriceDtoMapperTests {
     @Test
     void shouldReturnEmptyPriceWhenValueIsNull() {
         Price price = new Price();
-        price.setPrice(null);
+        price.setPvp(null);
         price.setCurr(null);
 
         PriceDto dto = priceDtoMapper.toPriceDto(price);

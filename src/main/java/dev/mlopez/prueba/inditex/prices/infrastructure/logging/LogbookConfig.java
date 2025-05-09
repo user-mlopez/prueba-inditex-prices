@@ -10,7 +10,7 @@ public class LogbookConfig {
 
     @Bean
     public Logbook logbook() {
-        Logbook logbook = Logbook.builder()
+        return Logbook.builder()
                 .condition(Conditions.exclude(
                         Conditions.requestTo("**/openapi/**"),
                         Conditions.requestTo("**/actuator/**"),
@@ -32,6 +32,5 @@ public class LogbookConfig {
                 .headerFilter(HeaderFilters.removeHeaders("Transfer-Encoding"))
                 .headerFilter(HeaderFilters.removeHeaders("Keep-Alive"))
                 .build();
-        return logbook;
     }
 }

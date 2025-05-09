@@ -23,7 +23,7 @@ public class PriceJpaRepositoryAdapter implements PriceRepositoryPort {
     @Override
     @Transactional(readOnly = true)
     public Optional<Price> findApplicablePrice(int brandId, int productId, LocalDateTime date) {
-        return priceJpaRepository.findApplicablePrice(brandId, productId, date).map(priceEntity -> mapper.toPrice(priceEntity));
+        return priceJpaRepository.findApplicablePrice(brandId, productId, date).map(mapper::toPrice);
     }
 
     @Override

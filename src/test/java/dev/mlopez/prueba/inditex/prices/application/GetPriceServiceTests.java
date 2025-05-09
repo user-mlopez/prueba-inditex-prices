@@ -20,7 +20,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 
 
 @ExtendWith(MockitoExtension.class)
-public class GetPriceServiceTests {
+class GetPriceServiceTests {
 
     @Mock
     private PriceRepositoryPort priceRepositoryPort;
@@ -32,9 +32,10 @@ public class GetPriceServiceTests {
     @Test
     void shouldThrowValidationExceptionWhenBrandIdIsInvalid() {
         int invalidBrandId = 0;
+        LocalDateTime now = LocalDateTime.now();
 
         ValidationException ex = assertThrows(ValidationException.class, () ->
-                getPriceService.execute(invalidBrandId, 1, LocalDateTime.now())
+                getPriceService.execute(invalidBrandId, 1, now)
         );
 
         assertTrue(ex.getErrors().contains("error.brandid.invalid"));
@@ -44,10 +45,12 @@ public class GetPriceServiceTests {
     @Test
     void shouldThrowValidationExceptionWhenBrandIdNotExists() {
         int notExistsBrandId = 999;
+        LocalDateTime now = LocalDateTime.now();
+
         Mockito.when(priceRepositoryPort.existsBrandId(notExistsBrandId)).thenReturn(false);
 
         ValidationException ex = assertThrows(ValidationException.class, () -> {
-            getPriceService.execute(notExistsBrandId, 1, LocalDateTime.now());
+            getPriceService.execute(notExistsBrandId, 1, now);
         });
 
         assertTrue(ex.getErrors().contains("error.brandid.notfound"));
@@ -56,9 +59,10 @@ public class GetPriceServiceTests {
     @Test
     void shouldThrowValidationExceptionWhenProductIdIsInvalid() {
         int invalidProductId = 0;
+        LocalDateTime now = LocalDateTime.now();
 
         ValidationException ex = assertThrows(ValidationException.class, () ->
-                getPriceService.execute(1, invalidProductId, LocalDateTime.now())
+                getPriceService.execute(1, invalidProductId, now)
         );
 
         assertTrue(ex.getErrors().contains("error.productid.invalid"));
@@ -68,10 +72,12 @@ public class GetPriceServiceTests {
     @Test
     void shouldThrowValidationExceptionWhenProductIdNotExists() {
         int notExistsProductId = 999;
+        LocalDateTime now = LocalDateTime.now();
+
         Mockito.when(priceRepositoryPort.existsProductId(notExistsProductId)).thenReturn(false);
 
         ValidationException ex = assertThrows(ValidationException.class, () -> {
-            getPriceService.execute(1, notExistsProductId, LocalDateTime.now());
+            getPriceService.execute(1, notExistsProductId, now);
         });
 
         assertTrue(ex.getErrors().contains("error.productid.notfound"));
@@ -82,6 +88,7 @@ public class GetPriceServiceTests {
     void shouldThrowValidationExceptionWhenProductIdNotAssociatedWithBrandId() {
         int existsBrandId = 1;
         int productIdNotAssociated = 1;
+        LocalDateTime now = LocalDateTime.now();
 
         Mockito.when(priceRepositoryPort.existsBrandId(existsBrandId)).thenReturn(true);
         Mockito.when(priceRepositoryPort.existsProductId(productIdNotAssociated)).thenReturn(true);
@@ -89,7 +96,7 @@ public class GetPriceServiceTests {
         Mockito.when(priceRepositoryPort.isProductAssociatedWithBrand(existsBrandId, productIdNotAssociated)).thenReturn(false);
 
         ValidationException ex = assertThrows(ValidationException.class, () -> {
-            getPriceService.execute(existsBrandId, productIdNotAssociated, LocalDateTime.now());
+            getPriceService.execute(existsBrandId, productIdNotAssociated, now);
         });
 
         assertTrue(ex.getErrors().contains("error.brandid.productid"));
@@ -109,6 +116,8 @@ public class GetPriceServiceTests {
 
     @Test
     void shouldThrowPriceNotFoundExceptionWhenNoApplicablePrice() {
+        LocalDateTime now = LocalDateTime.now();
+
         Mockito.when(priceRepositoryPort.existsBrandId(1)).thenReturn(true);
         Mockito.when(priceRepositoryPort.existsProductId(1)).thenReturn(true);
         Mockito.when(priceRepositoryPort.isProductAssociatedWithBrand(1, 1)).thenReturn(true);
@@ -116,7 +125,7 @@ public class GetPriceServiceTests {
                 .thenReturn(Optional.empty());
 
         PriceNotFoundException ex = assertThrows(PriceNotFoundException.class, () ->
-                getPriceService.execute(1, 1, LocalDateTime.now())
+                getPriceService.execute(1, 1, now)
         );
 
 

@@ -10,7 +10,7 @@ public class Price {
     private long priceList;
     private int productId;
     private int priority;
-    private BigDecimal price;
+    private BigDecimal pvp;
     private String curr;
 
     public int getBrandId() {
@@ -61,12 +61,12 @@ public class Price {
         this.priority = priority;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public BigDecimal getPvp() {
+        return pvp;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setPvp(BigDecimal pvp) {
+        this.pvp = pvp;
     }
 
     public String getCurr() {
@@ -87,7 +87,7 @@ public class Price {
                 ", priceList=" + priceList +
                 ", productId=" + productId +
                 ", priority=" + priority +
-                ", price=" + price +
+                ", pvp=" + pvp +
                 ", curr='" + curr + '\'' +
                 '}';
     }

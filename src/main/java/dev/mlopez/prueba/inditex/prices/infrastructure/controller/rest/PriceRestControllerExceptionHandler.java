@@ -57,7 +57,7 @@ class PriceRestControllerExceptionHandler {
     public @ResponseBody HttpErrorInfo handleMissingServletRequestParameterException(HttpServletRequest request, MissingServletRequestParameterException ex) {
 
         String errorMessage = messageSource.getMessage("error.paramter.required",
-                new Object[]{ex.getParameterName().toString(), ex.getParameterType()});
+                new Object[]{ex.getParameterName(), ex.getParameterType()});
 
         return createHttpErrorInfo(UNPROCESSABLE_ENTITY, request, errorMessage);
     }

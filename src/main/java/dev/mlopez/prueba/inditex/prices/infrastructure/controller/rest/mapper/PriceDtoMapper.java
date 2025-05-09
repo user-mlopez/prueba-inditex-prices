@@ -20,10 +20,10 @@ public interface PriceDtoMapper {
 
     @Named("formatearPrecio")
     static String formatearPrecio(Price price) {
-        if (price.getPrice() == null || price.getCurr() == null) {
-            LOG.warn("Review the currency and price fields of " + price);
+        if (price.getPvp() == null || price.getCurr() == null) {
+            LOG.warn("Review the currency and price fields of {0}", price);
             return "";
         }
-        return price.getPrice().toPlainString() + " " + price.getCurr();
+        return price.getPvp().toPlainString() + " " + price.getCurr();
     }
 }
