@@ -41,7 +41,7 @@ jobs:
         run: ./gradlew jacocoTestReport
 
       - name: Run SonarQube analysis
-        run: ./gradlew sonar -Dsonar.login=${{ secrets.SONAR_TOKEN_MLOPEZ }}
+        run: ./gradlew sonar -Dsonar.token=${{ secrets.SONAR_TOKEN_MLOPEZ }}
         env:
           SONAR_HOST_URL: "https://sonarcloud.io"
           SONAR_PROJECT_KEY: "user-mlopez_prueba-inditex-prices"
