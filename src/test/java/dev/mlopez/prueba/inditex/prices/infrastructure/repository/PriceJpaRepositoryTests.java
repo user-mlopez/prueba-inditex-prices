@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class PriceJpaRepositoryTests {
+class PriceJpaRepositoryTests {
 
     @Autowired
     private PriceJpaRepository priceJpaRepository;

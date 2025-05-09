@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class PriceRestControllerTests {
+class PriceRestControllerTests {
 
     @LocalServerPort
     private int port;

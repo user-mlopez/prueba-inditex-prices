@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {PriceEntityMapperImpl.class})
-public class PriceEntityMapperTests {
+class PriceEntityMapperTests {
 
     @Autowired
     private PriceEntityMapper priceEntityMapper;

@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {PriceDtoMapperImpl.class})
-public class PriceDtoMapperTests {
+class PriceDtoMapperTests {
 
     @Autowired
     private PriceDtoMapper priceDtoMapper;
