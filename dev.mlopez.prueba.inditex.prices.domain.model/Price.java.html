@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Price.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">prueba-inditex-prices</a> &gt; <a href="index.source.html" class="el_package">dev.mlopez.prueba.inditex.prices.domain.model</a> &gt; <span class="el_source">Price.java</span></div><h1>Price.java</h1><pre class="source lang-java linenums">package dev.mlopez.prueba.inditex.prices.domain.model;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
+<span class="fc" id="L6">public class Price {</span>
+    private int brandId;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
+    private long priceList;
+    private int productId;
+    private int priority;
+    private BigDecimal pvp;
+    private String curr;
+
+    public int getBrandId() {
+<span class="fc" id="L17">        return brandId;</span>
+    }
+
+    public void setBrandId(int brandId) {
+<span class="fc" id="L21">        this.brandId = brandId;</span>
+<span class="fc" id="L22">    }</span>
+
+    public LocalDateTime getStartDate() {
+<span class="fc" id="L25">        return startDate;</span>
+    }
+
+    public void setStartDate(LocalDateTime startDate) {
+<span class="fc" id="L29">        this.startDate = startDate;</span>
+<span class="fc" id="L30">    }</span>
+
+    public LocalDateTime getEndDate() {
+<span class="fc" id="L33">        return endDate;</span>
+    }
+
+    public void setEndDate(LocalDateTime endDate) {
+<span class="fc" id="L37">        this.endDate = endDate;</span>
+<span class="fc" id="L38">    }</span>
+
+    public long getPriceList() {
+<span class="fc" id="L41">        return priceList;</span>
+    }
+
+    public void setPriceList(long priceList) {
+<span class="fc" id="L45">        this.priceList = priceList;</span>
+<span class="fc" id="L46">    }</span>
+
+    public int getProductId() {
+<span class="fc" id="L49">        return productId;</span>
+    }
+
+    public void setProductId(int productId) {
+<span class="fc" id="L53">        this.productId = productId;</span>
+<span class="fc" id="L54">    }</span>
+
+    public int getPriority() {
+<span class="fc" id="L57">        return priority;</span>
+    }
+
+    public void setPriority(int priority) {
+<span class="fc" id="L61">        this.priority = priority;</span>
+<span class="fc" id="L62">    }</span>
+
+    public BigDecimal getPvp() {
+<span class="fc" id="L65">        return pvp;</span>
+    }
+
+    public void setPvp(BigDecimal pvp) {
+<span class="fc" id="L69">        this.pvp = pvp;</span>
+<span class="fc" id="L70">    }</span>
+
+    public String getCurr() {
+<span class="fc" id="L73">        return curr;</span>
+    }
+
+    public void setCurr(String curr) {
+<span class="fc" id="L77">        this.curr = curr;</span>
+<span class="fc" id="L78">    }</span>
+
+
+    @Override
+    public String toString() {
+<span class="fc" id="L83">        return &quot;Price{&quot; +</span>
+                &quot;brandId=&quot; + brandId +
+                &quot;, startDate=&quot; + startDate +
+                &quot;, endDate=&quot; + endDate +
+                &quot;, priceList=&quot; + priceList +
+                &quot;, productId=&quot; + productId +
+                &quot;, priority=&quot; + priority +
+                &quot;, pvp=&quot; + pvp +
+                &quot;, curr='&quot; + curr + '\'' +
+                '}';
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

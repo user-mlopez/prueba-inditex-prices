@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GetPriceService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">prueba-inditex-prices</a> &gt; <a href="index.source.html" class="el_package">dev.mlopez.prueba.inditex.prices.application</a> &gt; <span class="el_source">GetPriceService.java</span></div><h1>GetPriceService.java</h1><pre class="source lang-java linenums">package dev.mlopez.prueba.inditex.prices.application;
+
+import dev.mlopez.prueba.inditex.prices.domain.exceptions.PriceNotFoundException;
+import dev.mlopez.prueba.inditex.prices.domain.exceptions.ValidationException;
+import dev.mlopez.prueba.inditex.prices.domain.model.Price;
+import dev.mlopez.prueba.inditex.prices.domain.port.PriceRepositoryPort;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+public class GetPriceService {
+
+    private final PriceRepositoryPort priceRepositoryPort;
+
+<span class="fc" id="L16">    public GetPriceService(PriceRepositoryPort priceRepositoryPort) {</span>
+<span class="fc" id="L17">        this.priceRepositoryPort = priceRepositoryPort;</span>
+<span class="fc" id="L18">    }</span>
+
+    public Price execute(int brandId, int productId, LocalDateTime date) {
+
+<span class="fc" id="L22">        this.validate(brandId, productId, date);</span>
+
+<span class="fc" id="L24">        return priceRepositoryPort.findApplicablePrice(brandId, productId, date)</span>
+<span class="fc" id="L25">                .orElseThrow(() -&gt; new PriceNotFoundException(&quot;error.pricelist.notfound&quot;));</span>
+    }
+
+    private void validate(int brandId, int productId, LocalDateTime date) {
+<span class="fc" id="L29">        List&lt;String&gt; errors = new ArrayList&lt;&gt;();</span>
+
+<span class="fc" id="L31">        this.validateBrandId(brandId, errors);</span>
+<span class="fc" id="L32">        this.validateProductId(productId, errors);</span>
+<span class="fc" id="L33">        this.validateAssociation(brandId, productId, errors);</span>
+<span class="fc" id="L34">        this.validateDate(date, errors);</span>
+
+<span class="fc bfc" id="L36" title="All 2 branches covered.">        if (!errors.isEmpty()) {</span>
+<span class="fc" id="L37">            throw new ValidationException(errors);</span>
+        }
+<span class="fc" id="L39">    }</span>
+
+    private void validateBrandId(int brandId, List&lt;String&gt; errors) {
+<span class="fc bfc" id="L42" title="All 2 branches covered.">        if (brandId &lt;= 0) {</span>
+<span class="fc" id="L43">            errors.add(&quot;error.brandid.invalid&quot;);</span>
+<span class="fc bfc" id="L44" title="All 2 branches covered.">        } else if (!priceRepositoryPort.existsBrandId(brandId)) {</span>
+<span class="fc" id="L45">            errors.add(&quot;error.brandid.notfound&quot;);</span>
+        }
+<span class="fc" id="L47">    }</span>
+
+    private void validateProductId(int productId, List&lt;String&gt; errors) {
+<span class="fc bfc" id="L50" title="All 2 branches covered.">        if (productId &lt;= 0) {</span>
+<span class="fc" id="L51">            errors.add(&quot;error.productid.invalid&quot;);</span>
+<span class="fc bfc" id="L52" title="All 2 branches covered.">        } else if (!priceRepositoryPort.existsProductId(productId)) {</span>
+<span class="fc" id="L53">            errors.add(&quot;error.productid.notfound&quot;);</span>
+        }
+<span class="fc" id="L55">    }</span>
+
+    private void validateAssociation(int brandId, int productId, List&lt;String&gt; errors) {
+<span class="fc bfc" id="L58" title="All 4 branches covered.">        if (errors.isEmpty() &amp;&amp; !priceRepositoryPort.isProductAssociatedWithBrand(brandId, productId)) {</span>
+<span class="fc" id="L59">            errors.add(&quot;error.brandid.productid&quot;);</span>
+        }
+<span class="fc" id="L61">    }</span>
+
+    private void validateDate(LocalDateTime date, List&lt;String&gt; errors) {
+<span class="fc bfc" id="L64" title="All 2 branches covered.">        if (date == null) {</span>
+<span class="fc" id="L65">            errors.add(&quot;error.date.required&quot;);</span>
+        }
+<span class="fc" id="L67">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

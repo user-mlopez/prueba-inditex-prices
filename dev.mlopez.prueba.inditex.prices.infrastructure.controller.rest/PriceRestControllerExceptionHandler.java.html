@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PriceRestControllerExceptionHandler.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">prueba-inditex-prices</a> &gt; <a href="index.source.html" class="el_package">dev.mlopez.prueba.inditex.prices.infrastructure.controller.rest</a> &gt; <span class="el_source">PriceRestControllerExceptionHandler.java</span></div><h1>PriceRestControllerExceptionHandler.java</h1><pre class="source lang-java linenums">package dev.mlopez.prueba.inditex.prices.infrastructure.controller.rest;
+
+import dev.mlopez.prueba.inditex.prices.domain.exceptions.PriceNotFoundException;
+import dev.mlopez.prueba.inditex.prices.domain.exceptions.ValidationException;
+import dev.mlopez.prueba.inditex.prices.infrastructure.controller.rest.model.HttpErrorInfo;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.MissingServletRequestParameterException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+
+import static org.springframework.http.HttpStatus.NOT_FOUND;
+import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY;
+
+
+@RestControllerAdvice
+class PriceRestControllerExceptionHandler {
+
+    private final PriceRestMessageSource messageSource;
+
+<span class="fc" id="L24">    public PriceRestControllerExceptionHandler(PriceRestMessageSource messageSource) {</span>
+<span class="fc" id="L25">        this.messageSource = messageSource;</span>
+<span class="fc" id="L26">    }</span>
+
+    @ResponseStatus(UNPROCESSABLE_ENTITY)
+    @ExceptionHandler(ValidationException.class)
+    public @ResponseBody HttpErrorInfo handleInvalidInputException(HttpServletRequest request, ValidationException ex) {
+
+<span class="fc" id="L32">        return createHttpErrorInfo(UNPROCESSABLE_ENTITY, request, messageSource.getMessage(ex.getMessage()));</span>
+    }
+
+    @ResponseStatus(NOT_FOUND)
+    @ExceptionHandler(PriceNotFoundException.class)
+    public @ResponseBody HttpErrorInfo handleNotFoundExceptions(HttpServletRequest request, PriceNotFoundException ex) {
+
+<span class="fc" id="L39">        return createHttpErrorInfo(NOT_FOUND, request, messageSource.getMessage(ex.getMessage()));</span>
+    }
+
+    @ResponseStatus(UNPROCESSABLE_ENTITY)
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public @ResponseBody HttpErrorInfo handleMethodArgumentTypeMismatchException(HttpServletRequest request, MethodArgumentTypeMismatchException ex) {
+
+<span class="fc" id="L46">        String errorMessage = messageSource.getMessage(&quot;error.paramter.invalid&quot;,</span>
+<span class="fc" id="L47">                new Object[]{ex.getValue(), ex.getName()});</span>
+
+<span class="fc" id="L49">        return createHttpErrorInfo(UNPROCESSABLE_ENTITY, request, errorMessage);</span>
+    }
+
+    @ResponseStatus(UNPROCESSABLE_ENTITY)
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    public @ResponseBody HttpErrorInfo handleMissingServletRequestParameterException(HttpServletRequest request, MissingServletRequestParameterException ex) {
+
+<span class="fc" id="L56">        String errorMessage = messageSource.getMessage(&quot;error.paramter.required&quot;,</span>
+<span class="fc" id="L57">                new Object[]{ex.getParameterName(), ex.getParameterType()});</span>
+
+<span class="fc" id="L59">        return createHttpErrorInfo(UNPROCESSABLE_ENTITY, request, errorMessage);</span>
+    }
+
+    private HttpErrorInfo createHttpErrorInfo(HttpStatus httpStatus, HttpServletRequest request, String message) {
+
+<span class="fc" id="L64">        return new HttpErrorInfo(httpStatus, request.getRequestURL().toString(), message);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>
