@@ -1,6 +1,6 @@
-server:
-  servlet:
-    context-path: /prueba-inditex-prices
+#server:
+#  servlet:
+#    context-path: /prueba-inditex-prices
 
 spring:
   application:
