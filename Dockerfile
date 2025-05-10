@@ -1,29 +1,24 @@
-# Etapa de construcción
-FROM amazoncorretto:21-alpine-jdk AS builder
+# Etapa 1: Build de la app usando Gradle 8.5 y JDK 21
+FROM gradle:8.5-jdk21 AS builder
 
-# Usar una ruta absoluta para el WORKDIR
-WORKDIR extracted
+WORKDIR /app
 
-# Añadir el archivo JAR en el contenedor
-ADD ./build/libs/*.jar app.jar
+# Copia todos los archivos del proyecto
+COPY . .
 
-# Extraer las capas usando layertools
-RUN java -Djarmode=layertools -jar app.jar extract
+# Construye el JAR (sin ejecutar tests)
+RUN gradle build -x test
 
-# Etapa de producción
-FROM amazoncorretto:21-alpine-jdk
+# Etapa 2: Imagen de ejecución con JRE 21
+FROM eclipse-temurin:21-jre-alpine
 
-# Usar una ruta absoluta para el WORKDIR
-WORKDIR application
+WORKDIR /app
 
-# Copiar las capas extraídas desde la etapa de construcción
-COPY --from=builder extracted/dependencies/ ./
-COPY --from=builder extracted/spring-boot-loader/ ./
-COPY --from=builder extracted/snapshot-dependencies/ ./
-COPY --from=builder extracted/application/ ./
+# Copia el JAR generado desde la etapa anterior
+COPY --from=builder /app/build/libs/*.jar app.jar
 
 # Exponer el puerto 8080
 EXPOSE 8080
 
-# Configurar el entrypoint para ejecutar la aplicación
-ENTRYPOINT ["java", "org.springframework.boot.loader.launch.JarLauncher"]
+# Comando de inicio
+ENTRYPOINT ["java", "-jar", "app.jar"]
