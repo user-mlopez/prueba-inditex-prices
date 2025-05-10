@@ -39,6 +39,12 @@ jobs:
      
       - name: Generate JaCoCo Report
         run: ./gradlew jacocoTestReport
+        
+      - name: Deploy JaCoCo HTML report to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build/reports/jacoco/test/html
 
       - name: Run SonarQube analysis
         run: ./gradlew sonar -Dsonar.token=${{ secrets.SONAR_TOKEN_MLOPEZ }}
